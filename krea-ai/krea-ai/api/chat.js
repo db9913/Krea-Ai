@@ -3,7 +3,15 @@ const SYSTEM = "You are a friendly, helpful AI assistant. Answer clearly and con
 const hits = new Map(); // best-effort per-IP limit (resets when the function restarts)
 const LIMIT = 30, WINDOW = 60 * 60 * 1000;
 
-module.exports = async (req, res) => {
+module.exports = async (req, res) => {  const allowedOrigin = "https://db9913.github.io";
+
+  res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
   if (req.method !== "POST") return res.status(405).json({ error: "POST only." });
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) return res.status(500).json({ error: "Server is missing ANTHROPIC_API_KEY." });
