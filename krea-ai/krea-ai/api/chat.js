@@ -1,7 +1,7 @@
 // Vercel serverless function. Your API key lives in an environment variable, never in the page.
 const SYSTEM = "You are a friendly, helpful AI assistant. Answer clearly and concisely. Use Markdown (short lists, **bold**, fenced code blocks) when it helps.";
 const hits = new Map(); // best-effort per-IP limit (resets when the function restarts)
-const LIMIT = 30, WINDOW = 60 * 60 * 1000;
+const LIMIT = 15, WINDOW = 60 * 60 * 1000;
 
 module.exports = async (req, res) => {  const allowedOrigin = "https://db9913.github.io";
 
